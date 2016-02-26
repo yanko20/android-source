@@ -37,7 +37,7 @@ public class Methods extends Object {
 		 ************************************************/
 
 		// You are free to modify the return statement
-		return false;
+		return original ? false : true;
 	}
 
 	/*
@@ -60,6 +60,14 @@ public class Methods extends Object {
 		/************************************************
 		 * Your work goes here
 		 ************************************************/
+		for(int i = 0; i < numbers.length; i++){
+			if(numbers[i] > 0){
+				numbers[i] = -numbers[i];
+			}
+			else if(numbers[i] < 0){
+				numbers[i] = Math.abs(numbers[i]);
+			}
+		}
 	}
 
 
@@ -92,7 +100,12 @@ public class Methods extends Object {
 		 ************************************************/
 
 		// You are free to modify the return statement
-		return new boolean [0];
+		boolean[] bools = new boolean[someNumbers.length]; 
+
+		for(int i = 0; i < someNumbers.length; i++){
+			bools[i] = (someNumbers[i] >= floor) ? true : false;
+		}
+		return bools;
 	}
 
 	/*
@@ -119,7 +132,14 @@ public class Methods extends Object {
 		 ************************************************/
 
 		// You are free to modify the return statement
-		return new int[2];
+		int min = someNumbers[0];
+		int max = someNumbers[0];
+		for(int i = 0; i < someNumbers.length; i++){
+			min = (someNumbers[i] < min) ? someNumbers[i] : min;
+			max = (someNumbers[i] > max) ? someNumbers[i] : max;
+		}
+		int[] minMax = {min, max};
+		return minMax;
 	}
 
 
