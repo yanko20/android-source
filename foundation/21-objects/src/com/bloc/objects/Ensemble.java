@@ -20,6 +20,9 @@ class Ensemble extends Object {
 	 *	ASSIGNMENT:
 	 *	Create the first Ensemble constructor
 	/************************************************/
+	Ensemble(Artist... artists){
+		this(null, artists);
+	}
 
 	/*
 	 * Ensemble
@@ -36,4 +39,12 @@ class Ensemble extends Object {
 	 *	ASSIGNMENT:
 	 *	Create the second Ensemble constructor
 	/************************************************/
+	Ensemble(String name, Artist... artists){
+		if(name == null){
+			mName = artists[0].mFirstName + artists[0].mLastName;
+		}else{
+			mName = name;
+		}
+		mArtists = artists;
+	}
 }
