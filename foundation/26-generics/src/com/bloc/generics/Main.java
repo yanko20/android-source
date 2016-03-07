@@ -7,7 +7,10 @@ public class Main extends Object {
 	public static void main(String [] args) {
 
 		ToyBox toyBox = new ToyBox();
-		
+		toyBox.addToy(new Toy<Thing>(new ActionFigure()));
+		toyBox.addToy(new Toy<Thing>(new Book()));
+		toyBox.addToy(new Toy<Thing>(new Spoon()));
+
 		/************************************************
  		 *	ASSIGNMENT:
  		 *	Place several Toy objects into toyBox
