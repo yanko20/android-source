@@ -4,7 +4,7 @@ import java.util.*;
 
 /*
  * FavoritePastries
- * 
+ *
  * This class maintains a record of Pastry objects and their
  * relation to a 1 to 5 rating scale.
  *
@@ -24,15 +24,16 @@ public class FavoritePastries {
 	 *	Use a HashMap to store the relationship
 	 *	between rating and pastry: HashMap<Integer, List<Pastry>>
 	/************************************************/
-
+  HashMap<Integer, List<Pastry>> ratingsMap;
 
 	public FavoritePastries() {
 		/************************************************
  	 	 *	WORK HERE
-		/************************************************/
+		************************************************/
+    ratingsMap = new HashMap<Integer, List<Pastry>>();
 	}
 
-	/* 
+	/*
 	 * addPastry
 	 *
 	 * Add a Pastry to the FavoritePastries class.
@@ -51,9 +52,20 @@ public class FavoritePastries {
 		/************************************************
  	 	 *	WORK HERE
 		/************************************************/
+
+    int currRating = getRatingForPastry(pastry);
+    ArrayList<Pastry> pastries = (ArrayList<Pastry>)getPastriesForRating(rating);
+    if(currRating == -1){
+      pastries.add(pastry);
+      ratingsMap.put(rating, pastries);
+    }else if(currRating != rating){
+      removePastry(pastry);
+      pastries.add(pastry);
+      ratingsMap.put(rating, pastries);
+    }
 	}
 
-	/* 
+	/*
 	 * removePastry
 	 *
 	 * Remove a Pastry from FavoritePastries
@@ -69,10 +81,16 @@ public class FavoritePastries {
 		/************************************************
  	 	 *	WORK HERE, you must modify the return value
 		/************************************************/
+    for(List<Pastry> pastries : ratingsMap.values()){
+      if(pastries.contains(pastry)){
+        pastries.remove(pastry);
+        return true;
+      }
+    }
 		return false;
 	}
 
-	/* 
+	/*
 	 * getRatingForPastry
 	 *
 	 * Return the associated rating for a given Pastry
@@ -90,10 +108,17 @@ public class FavoritePastries {
 		/************************************************
  	 	 *	WORK HERE, you must modify the return value
 		/************************************************/
+    for(Map.Entry<Integer, List<Pastry>> entry : ratingsMap.entrySet()){
+      List<Pastry> pastries = entry.getValue();
+      if(pastries.contains(pastry)){
+        Integer rating = entry.getKey();
+        return rating;
+      }
+    }
 		return -1;
 	}
 
-	/* 
+	/*
 	 * getPastriesForRating
 	 *
 	 * Return a Set of all the Pastries with a given
@@ -113,7 +138,8 @@ public class FavoritePastries {
 		/************************************************
  	 	 *	WORK HERE, you must modify the return value
 		/************************************************/
-		return null;
+    Collection<Pastry> pastries = ratingsMap.get(rating);
+    return pastries == null ? new ArrayList<Pastry>() : pastries;
 	}
 
 }
